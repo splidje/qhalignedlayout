@@ -5,7 +5,7 @@ import string
 
 from qhalignedlayout import *
 
-from PySide import QtCore, QtGui
+from PySide2 import QtCore, QtGui, QtWidgets
 
 def random_string():
     return "".join(
@@ -14,10 +14,10 @@ def random_string():
         range(random.randint(1, 20))
     )
 
-class BorderedWidget(QtGui.QWidget):
+class BorderedWidget(QtWidgets.QWidget):
     def __init__(self, widg):
         super(BorderedWidget, self).__init__(parent=widg.parent())
-        layout = QtGui.QVBoxLayout()
+        layout = QtWidgets.QVBoxLayout()
         self.setLayout(layout)
         layout.addWidget(widg)
         layout.setSpacing(0)
@@ -35,31 +35,31 @@ class BorderedWidget(QtGui.QWidget):
     #"""
 
 
-class SpecialWidget(QtGui.QWidget):
+class SpecialWidget(QtWidgets.QWidget):
     def __init__(self, group, *args, **kwargs):
         super(SpecialWidget, self).__init__(*args, **kwargs)
-        
+
         layout = QHAlignedLayout(group)
         self.setLayout(layout)
 
-        layout.addWidget(BorderedWidget(QtGui.QLabel(random_string(), self)))
-        layout.addWidget(BorderedWidget(QtGui.QLabel(random_string(), self)))
-        butt = BorderedWidget(QtGui.QPushButton(random_string(), self))
+        layout.addWidget(BorderedWidget(QtWidgets.QLabel(random_string(), self)))
+        layout.addWidget(BorderedWidget(QtWidgets.QLabel(random_string(), self)))
+        butt = BorderedWidget(QtWidgets.QPushButton(random_string(), self))
         layout.addWidget(butt)
         before = layout.count()
         butt.setVisible(random.randint(0, 1))
-        layout.addWidget(BorderedWidget(QtGui.QLabel(random_string(), self)))
+        layout.addWidget(BorderedWidget(QtWidgets.QLabel(random_string(), self)))
 
         layout.setStretch(0, 1)
-    
 
-class TestQAL(QtGui.QFrame):
+
+class TestQAL(QtWidgets.QFrame):
     def __init__(self, *args, **kwargs):
         super(TestQAL, self).__init__(*args, **kwargs)
-        
+
         group = QHAlignedLayoutGroup(self)
-        
-        layout = QtGui.QVBoxLayout()
+
+        layout = QtWidgets.QVBoxLayout()
 
         self.setLayout(layout)
 
@@ -74,16 +74,16 @@ class TestQAL(QtGui.QFrame):
         layout.addStretch()
 
     def make_group(self):
-        self.group_box = QtGui.QGroupBox(self)
+        self.group_box = QtWidgets.QGroupBox(self)
         self.group_box.setTitle(random_string())
-        layout = QtGui.QVBoxLayout()
+        layout = QtWidgets.QVBoxLayout()
         layout.setSpacing(0)
         layout.setContentsMargins(0, 0, 0, 0)
         self.group_box.setLayout(layout)
         self.layout().addWidget(self.group_box)
 
 if __name__ == '__main__':
-    qapp = QtGui.QApplication(sys.argv)
+    qapp = QtWidgets.QApplication(sys.argv)
 
     window = TestQAL()
     window.setVisible(True)

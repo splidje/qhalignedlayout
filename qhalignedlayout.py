@@ -1,7 +1,7 @@
 import sys
 import math
 
-from PySide import QtCore, QtGui
+from PySide2 import QtCore, QtGui, QtWidgets
 
 class QHAlignedLayoutGroup(QtCore.QObject):
     def __init__(self, *args, **kwargs):
@@ -65,7 +65,7 @@ class QHAlignedLayoutGroup(QtCore.QObject):
 
         # take first as reference
         ref_l = self._layouts[0]
-        
+
         # sum max widths with margins and spacing
         marg = ref_l.contentsMargins()
         total_width = sum(max_widths) + marg.left() + marg.right() + ref_l.spacing() * (max_count-1)
@@ -79,7 +79,7 @@ class QHAlignedLayoutGroup(QtCore.QObject):
         return self._align_widths(layout, QtGui.QLayoutItem.minimumSize)
 
 
-class QHAlignedLayout(QtGui.QHBoxLayout):
+class QHAlignedLayout(QtWidgets.QHBoxLayout):
     def __init__(self, layout_group, *args, **kwargs):
         super(QHAlignedLayout, self).__init__(*args, **kwargs)
         self._layout_group = layout_group
